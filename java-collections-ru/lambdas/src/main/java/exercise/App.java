@@ -19,7 +19,6 @@ class App {
         return Arrays.stream(horizontallyStretched)
                 .flatMap((item) -> Arrays.stream(new String[][] { item, item }))
                 .toArray(String[][]::new);
-
     }
 }
 
