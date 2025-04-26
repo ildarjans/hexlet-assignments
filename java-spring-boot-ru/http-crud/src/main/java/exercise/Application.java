@@ -35,14 +35,14 @@ public class Application {
         return posts.stream().filter(post -> post.getId().equals(id)).findFirst();
     }
 
-    @GetMapping("/posts")
+    @PostMapping("/posts")
     public Post create(@RequestBody Post post) {
         posts.add(post);
 
         return post;
     }
 
-    @GetMapping("/posts/{id}")
+    @PutMapping("/posts/{id}")
     public Post update(@PathVariable String id, @RequestBody Post data) {
         var post = posts.stream().filter(p -> p.getId().equals(id)).findFirst();
 
@@ -54,7 +54,7 @@ public class Application {
         return data;
     }
 
-    @GetMapping("/posts/{id}")
+    @DeleteMapping("/posts/{id}")
     public void delete(@PathVariable String id) {
         posts.removeIf(p -> p.getId().equals(id));
     }
