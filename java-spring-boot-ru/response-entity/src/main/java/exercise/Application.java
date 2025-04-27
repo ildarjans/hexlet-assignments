@@ -32,7 +32,7 @@ import lombok.Setter;
 public class Application {
     // Хранилище добавленных постов
     @Setter
-    private static  List<Post> posts = Data.getPosts();
+    private static List<Post> posts = Data.getPosts();
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -43,7 +43,7 @@ public class Application {
     @GetMapping("/posts")
     public ResponseEntity<List<Post>> getPosts(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int limit ) {
         int from = page * limit;
-        int to = (page + 1) * limit;
+        int to = Math.min((page + 1) * limit, posts.size());
 
         var selectedPosts = IntStream.range(from, to).mapToObj(posts::get).collect(Collectors.toList());
 
