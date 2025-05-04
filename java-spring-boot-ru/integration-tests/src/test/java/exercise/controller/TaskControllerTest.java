@@ -1,5 +1,6 @@
 package exercise.controller;
 
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,6 +27,7 @@ import exercise.model.Task;
 // BEGIN
 @SpringBootTest
 @AutoConfigureMockMvc
+@Transactional
 // END
 class TaskControllerTest {
 
@@ -86,7 +88,7 @@ class TaskControllerTest {
         var task = createTaskInstance();
         taskRepository.save(task);
 
-       var result = mockMvc.perform(get("/tasks/" + task.getId()))
+       var result = mockMvc.perform(get("/tasks/{id}", task.getId()))
            .andExpect(status().isOk())
            .andReturn();
 
@@ -121,7 +123,7 @@ class TaskControllerTest {
 
         taskRepository.save(task);
 
-        var request = put("/tasks/" + task.getId())
+        var request = put("/tasks/{id}", task.getId())
             .contentType(MediaType.APPLICATION_JSON)
             .content(om.writeValueAsString(body));
 
@@ -139,10 +141,10 @@ class TaskControllerTest {
 
         taskRepository.save(task);
 
-        mockMvc.perform(delete("/tasks/" + task.getId()))
+        mockMvc.perform(delete("/tasks/{id}",  task.getId()))
             .andExpect(status().isOk());
 
-        assertThat(taskRepository.findAll()).isEmpty();
+        assertThat(taskRepository.findById(task.getId())).isEmpty();
     }
     // END
 }
