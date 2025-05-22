@@ -40,3 +40,4 @@ public class Book implements BaseEntity {
     @ManyToOne
     private Author author;
 }
+4

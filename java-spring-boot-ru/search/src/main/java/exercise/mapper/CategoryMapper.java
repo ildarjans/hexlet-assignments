@@ -19,4 +19,3 @@ public abstract class CategoryMapper {
 
     public abstract CategoryDTO map(Category model);
 }
-

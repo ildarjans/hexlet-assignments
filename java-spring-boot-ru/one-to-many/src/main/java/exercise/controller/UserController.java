@@ -54,3 +54,12 @@ public class UserController {
         return userDto;
     }
 }
+
+// org.openapitools.jackson.nullable.JsonNullable<T>
+//public void ifPresent(
+//    java.util.function.Consumer<? super T> action
+//)
+//
+//If a value is present, performs the given action with the value, otherwise does nothing.
+//Params:
+//action – the action to be performed, if a value is present
