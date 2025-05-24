@@ -44,7 +44,7 @@ public class ArticleController {
     // BEGIN
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    ArticleDTO create(@Valid @RequestBody ArticleCreateDTO dto) {
+    ArticleDTO createArticle(@Valid @RequestBody ArticleCreateDTO dto) {
         var currentUser = userUtils.getCurrentUser();
         if (currentUser == null) {
             return null;
